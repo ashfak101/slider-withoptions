@@ -1,0 +1,18 @@
+.js-Carousel {
+  background: #272822;
+  height: 255px;
+  margin: 0 auto 2em;
+  overflow: hidden;
+  position: relative;
+  width: 600px;
+}
+.dots {
+  background: #aaaaaa;
+  border-radius: 0.75em;
+  cursor: pointer;
+  display: inline-block;
+  height: 0.75em;
+  margin: 0 0.75em;
+  width: 0.75em;
+  transition: all 0.2s ease;
+}
