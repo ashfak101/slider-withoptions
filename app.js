@@ -15,8 +15,19 @@ const ashfakSlider = (options) => {
   console.log(container);
   console.log(slider.offsetWidth);
   let items = slider.offsetWidth / item;
-  let count = slide.length / item;
+  let count = Math.ceil(slide.length / item);
   let i = 0;
+
+  const inter = () => {
+    i = i < count - 1 ? i + 1 : 0;
+    slider.style.left = -slider.offsetWidth * i + "px";
+  };
+  let Intervel = setInterval(() => {
+    if (autoplay) {
+      inter();
+    }
+  }, interval);
+
   //   slide.style.minWidth = slider.offsetWidth + "px";
   // /Navigation enable
   slide.forEach((singleSlide) => {
@@ -54,8 +65,10 @@ const ashfakSlider = (options) => {
   let bullets = document.getElementsByTagName("li");
   console.log(bullets);
   //   ---------------------------
+
   if (nav) {
     //   Navigation
+
     const div = document.createElement("div");
     div.innerHTML = `
         <span class="prev">prev</span>
@@ -66,11 +79,10 @@ const ashfakSlider = (options) => {
     const prev = document.querySelector(".prev");
     // next navigation
     next.addEventListener("click", () => {
-      i = i < slide.length ? i + 1 : 0;
-
+      i = i < count - 1 ? i + 1 : 0;
+      clearInterval(Intervel);
       slider.style.left = -slider.offsetWidth * i + "px";
       document.querySelector(".dots li").classList.remove("active");
-
       bullets.children[i + 1].classList.add("active");
     });
     //   console.log(next);
@@ -78,13 +90,9 @@ const ashfakSlider = (options) => {
     prev.addEventListener("click", () => {
       i = i > 0 ? i - 1 : 0;
       slider.style.left = -slider.offsetWidth * i + "px";
+      window.clearInterval(id);
     });
   }
+
   //
-  if (autoplay === true) {
-    setInterval(() => {
-      i = i < count ? i + 1 : 0;
-      slider.style.left = -slider.offsetWidth * i + "px";
-    }, interval);
-  }
 };
