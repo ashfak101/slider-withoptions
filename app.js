@@ -55,9 +55,11 @@ const ashfakSlider = (options) => {
     dotsClick.forEach((dot, index) => {
       dot.addEventListener("click", () => {
         i = index;
+
         document.querySelector(".dots .active").classList.remove("active");
         dot.classList.add("active");
         slider.style.left = -slider.offsetWidth * i + "px";
+        clearInterval(Intervel);
       });
     });
   }
