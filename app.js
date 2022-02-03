@@ -18,26 +18,43 @@ const ashfakSlider = (options) => {
   let count = Math.ceil(slide.length / item);
   let i = 0;
 
-  const inter = () => {
-    i = i < count - 1 ? i + 1 : 0;
-    document.querySelector(".dots .active").classList.remove("active");
-    bullets[i].classList.add("active");
-    slider.style.left = -slider.offsetWidth * i + "px";
-    // clearInterval(Intervel);
-  };
-  // clearInterval(Intervel);
-  let Intervel = setInterval(() => {
-    if (autoplay) {
-      inter();
-    }
-  }, interval);
-  console.log(Intervel);
   //   slide.style.minWidth = slider.offsetWidth + "px";
   // /Navigation enable
   slide.forEach((singleSlide) => {
     singleSlide.style.minWidth = items + "px";
   });
+  // const inter = () => {
+  //   i = i < count - 1 ? i + 1 : 0;
+  //   document.querySelector(".dots .active").classList.remove("active");
+  //   bullets[i].classList.add("active");
+  //   slider.style.left = -slider.offsetWidth * i + "px";
+  //   // clearInterval(Intervel);
+  // };
+  // // ;
 
+  // //  autoplay
+  // let Intervel = setInterval(() => {
+  //   if (autoplay) {
+  //     inter();
+  //   }
+  // }, interval);
+  // console.log(Intervel);
+
+  const autoplaySlider = () => {
+    i = i < count - 1 ? i + 1 : 0;
+    document.querySelector(".dots .active").classList.remove("active");
+    bullets[i].classList.add("active");
+    slider.style.left = -slider.offsetWidth * i + "px";
+  };
+  // const loop = () => {
+  //   setInterval(() => {
+  //     autoplaySlider();
+  //   }, interval);
+  // };
+  // if (autoplay) {
+  //   loop();
+
+  let Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
   //   ---------Dots---------------------
   if (dots) {
     const ul = document.createElement("ul");
@@ -84,24 +101,31 @@ const ashfakSlider = (options) => {
     // next navigation
 
     next.addEventListener("click", (e) => {
-      i = i < count - 1 ? i + 1 : 0;
+      autoplaySlider();
+      clearInterval(Interval);
+      Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
+      // clearInterval(loop());
+      // setInterval(autoplaySlider, interval);
 
-      document.querySelector(".dots .active").classList.remove("active");
-      bullets[i].classList.add("active");
-      slider.style.left = -slider.offsetWidth * i + "px";
+      // i = i < count - 1 ? i + 1 : 0;
+
+      // document.querySelector(".dots .active").classList.remove("active");
+      // bullets[i].classList.add("active");
+      // slider.style.left = -slider.offsetWidth * i + "px";
     });
     //   console.log(next);
     //   prev navigation
     prev.addEventListener("click", () => {
       i = i > 0 ? i - 1 : 0;
+
       document.querySelector(".dots .active").classList.remove("active");
       bullets[i].classList.add("active");
       slider.style.left = -slider.offsetWidth * i + "px";
     });
   };
-
   if (nav) {
     //   Navigation
+
     navigation();
   }
 
