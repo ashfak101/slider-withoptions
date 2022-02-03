@@ -1,6 +1,6 @@
 #container {
   width: 803px;
-
+  position: relative;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -38,15 +38,17 @@ ul li {
   background: blue !important;
 }
 .next {
+  color: white;
   position: absolute;
-  right: 111px;
+  right: 0;
   font-size: 20px;
-  top: 50%;
+  top: 30%;
   cursor: pointer;
 }
 .prev {
+  color: white;
   position: absolute;
   cursor: pointer;
-  top: 50%;
+  top: 30%;
   font-size: 20px;
 }
