@@ -20,14 +20,18 @@ const ashfakSlider = (options) => {
 
   const inter = () => {
     i = i < count - 1 ? i + 1 : 0;
+    document.querySelector(".dots .active").classList.remove("active");
+    bullets[i].classList.add("active");
     slider.style.left = -slider.offsetWidth * i + "px";
+    // clearInterval(Intervel);
   };
+  // clearInterval(Intervel);
   let Intervel = setInterval(() => {
     if (autoplay) {
       inter();
     }
   }, interval);
-
+  console.log(Intervel);
   //   slide.style.minWidth = slider.offsetWidth + "px";
   // /Navigation enable
   slide.forEach((singleSlide) => {
@@ -59,7 +63,7 @@ const ashfakSlider = (options) => {
         document.querySelector(".dots .active").classList.remove("active");
         dot.classList.add("active");
         slider.style.left = -slider.offsetWidth * i + "px";
-        clearInterval(Intervel);
+        // clearInterval(Intervel);
       });
     });
   }
@@ -79,13 +83,10 @@ const ashfakSlider = (options) => {
     const prev = document.querySelector(".prev");
     // next navigation
 
-    next.addEventListener("click", () => {
+    next.addEventListener("click", (e) => {
       i = i < count - 1 ? i + 1 : 0;
-      clearInterval(Intervel);
-      // const dotet = document.querySelectorAll(".dots");
-      console.log(bullets);
+
       document.querySelector(".dots .active").classList.remove("active");
-      // console.log(dotet.children[i + 1]);
       bullets[i].classList.add("active");
       slider.style.left = -slider.offsetWidth * i + "px";
     });
@@ -93,9 +94,12 @@ const ashfakSlider = (options) => {
     //   prev navigation
     prev.addEventListener("click", () => {
       i = i > 0 ? i - 1 : 0;
+      document.querySelector(".dots .active").classList.remove("active");
+      bullets[i].classList.add("active");
       slider.style.left = -slider.offsetWidth * i + "px";
     });
   };
+
   if (nav) {
     //   Navigation
     navigation();
