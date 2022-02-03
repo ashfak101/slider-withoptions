@@ -64,13 +64,11 @@ const ashfakSlider = (options) => {
     });
   }
 
-  let bullets = document.getElementsByTagName("li");
-  console.log(bullets);
+  let bullets = document.querySelectorAll(".dots li");
+
   //   ---------------------------
 
-  if (nav) {
-    //   Navigation
-
+  const navigation = () => {
     const div = document.createElement("div");
     div.innerHTML = `
         <span class="prev">prev</span>
@@ -80,20 +78,27 @@ const ashfakSlider = (options) => {
     const next = document.querySelector(".next");
     const prev = document.querySelector(".prev");
     // next navigation
+
     next.addEventListener("click", () => {
       i = i < count - 1 ? i + 1 : 0;
       clearInterval(Intervel);
+      // const dotet = document.querySelectorAll(".dots");
+      console.log(bullets);
+      document.querySelector(".dots .active").classList.remove("active");
+      // console.log(dotet.children[i + 1]);
+      bullets[i].classList.add("active");
       slider.style.left = -slider.offsetWidth * i + "px";
-      document.querySelector(".dots li").classList.remove("active");
-      bullets.children[i + 1].classList.add("active");
     });
     //   console.log(next);
     //   prev navigation
     prev.addEventListener("click", () => {
       i = i > 0 ? i - 1 : 0;
       slider.style.left = -slider.offsetWidth * i + "px";
-      window.clearInterval(id);
     });
+  };
+  if (nav) {
+    //   Navigation
+    navigation();
   }
 
   //
