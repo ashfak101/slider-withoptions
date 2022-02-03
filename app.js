@@ -18,6 +18,11 @@ const ashfakSlider = (options) => {
   let count = Math.ceil(slide.length / item);
   let i = 0;
 
+  // For Reseting Interval
+  const resetInterVal = () => {
+    clearInterval(Interval);
+    Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
+  };
   //   slide.style.minWidth = slider.offsetWidth + "px";
   // /Navigation enable
   slide.forEach((singleSlide) => {
@@ -40,10 +45,13 @@ const ashfakSlider = (options) => {
   // }, interval);
   // console.log(Intervel);
 
-  const autoplaySlider = () => {
-    i = i < count - 1 ? i + 1 : 0;
+  const addingClass = () => {
     document.querySelector(".dots .active").classList.remove("active");
     bullets[i].classList.add("active");
+  };
+  const autoplaySlider = () => {
+    i = i < count - 1 ? i + 1 : 0;
+    addingClass();
     slider.style.left = -slider.offsetWidth * i + "px";
   };
   // const loop = () => {
@@ -76,10 +84,11 @@ const ashfakSlider = (options) => {
     dotsClick.forEach((dot, index) => {
       dot.addEventListener("click", () => {
         i = index;
-
-        document.querySelector(".dots .active").classList.remove("active");
-        dot.classList.add("active");
+        addingClass();
+        // document.querySelector(".dots .active").classList.remove("active");
+        // dot.classList.add("active");
         slider.style.left = -slider.offsetWidth * i + "px";
+        resetInterVal();
         // clearInterval(Intervel);
       });
     });
@@ -102,8 +111,9 @@ const ashfakSlider = (options) => {
 
     next.addEventListener("click", (e) => {
       autoplaySlider();
-      clearInterval(Interval);
-      Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
+      resetInterVal();
+      // clearInterval(Interval);
+      // Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
       // clearInterval(loop());
       // setInterval(autoplaySlider, interval);
 
@@ -117,15 +127,17 @@ const ashfakSlider = (options) => {
     //   prev navigation
     prev.addEventListener("click", () => {
       i = i > 0 ? i - 1 : 0;
-
-      document.querySelector(".dots .active").classList.remove("active");
-      bullets[i].classList.add("active");
+      addingClass();
+      // document.querySelector(".dots .active").classList.remove("active");
+      // bullets[i].classList.add("active");
       slider.style.left = -slider.offsetWidth * i + "px";
+      resetInterVal();
+      // clearInterval(Interval);
+      // Interval = autoplay ? setInterval(autoplaySlider, interval) : null;
     });
   };
   if (nav) {
     //   Navigation
-
     navigation();
   }
 
