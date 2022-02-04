@@ -9,7 +9,7 @@
   width: 800px;
   height: 300px;
   display: flex;
-  transition: ease-in 1s;
+  /* transition: ease-in 1s; */
   position: relative;
   left: 0;
 }

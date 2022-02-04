@@ -4,13 +4,16 @@ const ashfakSlider = (options) => {
     nav = options.nav,
     item = options.item,
     dots = options.dots;
+  animation = options.animation;
 
   // Dom
   const container = document.getElementById("container");
   const slider = document.querySelector(".slider");
   const slide = document.querySelectorAll(".slide");
   //   const slides = document.querySelector(".slide");
-
+  slider.style.animation = animation;
+  slider.style.animationDuration = interval + "ms";
+  slider.style.animationIterationCount = "infinite";
   //   slider.style.display = "none";
   console.log(container);
   console.log(slider.offsetWidth);
@@ -89,7 +92,6 @@ const ashfakSlider = (options) => {
         // dot.classList.add("active");
         slider.style.left = -slider.offsetWidth * i + "px";
         resetInterVal();
-        // clearInterval(Intervel);
       });
     });
   }
