@@ -14,6 +14,8 @@ const ashfakSlider = (options) => {
   slider.style.animation = animation;
   slider.style.animationDuration = interval + "ms";
   slider.style.animationIterationCount = "infinite";
+
+  slider.style.animationDirection = "normal";
   //   slider.style.display = "none";
   console.log(container);
   console.log(slider.offsetWidth);
